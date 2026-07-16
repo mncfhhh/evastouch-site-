@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eva's Touch — Tabliers de cuisine</title>
+<meta name="description" content="Tabliers de cuisine Eva's Touch — plusieurs coloris, livraison dans les 58 wilayas, paiement à la livraison.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="#top" class="logo">Eva's Touch</a>
+    <button type="button" id="cart-icon-btn" class="cart-icon-btn" aria-label="Voir le panier">
+      🛍️ <span id="cart-badge" class="cart-badge">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="product-section">
+    <div class="wrap product-grid">
+
+      <div class="product-media">
+        <img id="product-image" src="images/placeholder.svg" alt="Tablier de cuisine Eva's Touch">
+      </div>
+
+      <div class="product-info">
+        <h1 id="product-title">Tabliers de cuisine</h1>
+        <p id="product-price" class="product-price">DA 1,800.00</p>
+
+        <div class="product-block">
+          <p class="block-label">Couleur</p>
+          <div id="variant-list" class="variant-list"></div>
+        </div>
+
+        <div class="product-block qty-block">
+          <p class="block-label">Quantité</p>
+          <div class="stepper">
+            <button type="button" id="qty-minus" aria-label="Diminuer">-</button>
+            <span id="qty-value">1</span>
+            <button type="button" id="qty-plus" aria-label="Augmenter">+</button>
+          </div>
+        </div>
+
+        <div class="product-actions">
+          <button type="button" id="add-to-cart-btn" class="btn btn-primary btn-block">🛒 Ajouter au panier</button>
+          <span id="add-status" class="add-status">Ajouté au panier ✓</span>
+          <button type="button" id="view-cart-btn" class="btn btn-dark btn-block">🛍️ Voir le panier</button>
+        </div>
+
+        <div class="product-perks">
+          <p>✓ Tissu anti taches et imperméable</p>
+          <p>✓ Livraison dans les 58 wilayas</p>
+          <p>✓ Paiement à la livraison</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- CART DRAWER -->
+<div id="cart-overlay-bg" class="overlay-bg"></div>
+<aside id="cart-drawer" class="cart-drawer" aria-label="Panier">
+  <div class="cart-drawer-header">
+    <h2>Votre panier</h2>
+    <button type="button" id="cart-close-btn" class="icon-close" aria-label="Fermer">✕</button>
+  </div>
+  <div id="cart-drawer-body" class="cart-drawer-body"></div>
+  <div id="cart-drawer-footer" class="cart-drawer-footer" style="display:none;">
+    <div class="cart-subtotal-row">
+      <span>Sous-total</span>
+      <span id="cart-subtotal">0 DA</span>
+    </div>
+    <button type="button" id="checkout-btn" class="btn btn-primary btn-block">Confirmer votre commande</button>
+  </div>
+</aside>
+
+<!-- CHECKOUT POPUP -->
+<div id="checkout-overlay" class="checkout-overlay">
+  <div class="checkout-modal">
+    <div class="checkout-header">
+      <h2>Finaliser votre commande</h2>
+      <button type="button" id="checkout-close-btn" class="icon-close" aria-label="Fermer">✕</button>
+    </div>
+
+    <div class="checkout-body">
+      <div id="checkout-cart-summary" class="checkout-cart-summary"></div>
+
+      <form id="checkout-form" class="checkout-form">
+        <p class="section-label">👤 Vos informations</p>
+        <div class="field-row">
+          <label>Prénom <span class="ar">الاسم</span>
+            <input type="text" name="firstName" required autocomplete="given-name">
+          </label>
+          <label>Nom <span class="ar">اللقب</span>
+            <input type="text" name="lastName" required autocomplete="family-name">
+          </label>
+        </div>
+        <label>
+          Téléphone <span class="ar">الهاتف</span>
+          <input type="tel" name="phone" required pattern="0[5-7][0-9]{8}" placeholder="05/06/07 XX XX XX XX" autocomplete="tel">
+        </label>
+        <p class="field-hint">Format : 05, 06 ou 07 suivi de 8 chiffres</p>
+
+        <p class="section-label">📍 Lieu de livraison</p>
+        <label>
+          Wilaya <span class="ar">الولاية</span>
+          <select id="wilaya-select" required>
+            <option value="">-- Sélectionnez votre wilaya --</option>
+          </select>
+        </label>
+        <label>
+          Commune <span class="ar">البلدية</span>
+          <select id="commune-select" disabled required>
+            <option value="">-- Choisissez d'abord la wilaya --</option>
+          </select>
+        </label>
+
+        <p class="section-label">🚚 Mode de livraison</p>
+        <div class="radio-row">
+          <label class="radio-label">
+            <input type="radio" name="delivery-type" value="home" checked> Domicile
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="delivery-type" value="desk"> Bureau Yalidine
+          </label>
+        </div>
+
+        <label id="address-field">
+          Adresse complète
+          <input type="text" name="address" placeholder="Rue, numéro, repère...">
+        </label>
+
+        <label id="center-field" style="display:none;">
+          Bureau Yalidine
+          <select id="center-select"></select>
+        </label>
+
+        <div id="desk-option-wrap" style="display:none;"></div>
+
+        <div class="checkout-summary">
+          <div class="summary-row"><span>Sous-total</span><span id="sum-subtotal">0 DA</span></div>
+          <div class="summary-row"><span>Livraison</span><span id="sum-shipping">-- DA</span></div>
+          <div class="summary-row summary-total"><span>Total</span><span id="sum-total">0 DA</span></div>
+        </div>
+
+        <button type="submit" id="checkout-submit" class="btn btn-primary btn-block">Confirmer votre commande</button>
+        <p id="checkout-status" class="form-status" role="status"></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>Eva's Touch</span>
+    <span class="footer-sep">·</span>
+    <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/checkout.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
